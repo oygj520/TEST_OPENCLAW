@@ -17,6 +17,7 @@ const app = createApp(App)
  * 创建状态管理
  */
 const pinia = createPinia()
+console.log('Pinia created:', pinia)
 pinia.use(piniaPluginPersistedstate)
 
 /**
@@ -31,10 +32,13 @@ const router = createRouter({
  * 使用插件
  */
 app.use(pinia)
+console.log('Pinia registered with app')
 app.use(router)
+console.log('Router registered with app')
 app.use(NaiveUI)
 
 /**
  * 挂载应用
  */
 app.mount('#app')
+console.log('App mounted')
