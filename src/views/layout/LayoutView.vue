@@ -69,11 +69,11 @@
           <!-- User Profile -->
           <div class="flex items-center space-x-3">
             <div class="text-right">
-              <p class="text-sm font-medium text-gray-900">{{ user?.nickname || user?.username }}</p>
+              <p class="text-sm font-medium text-gray-900">{{ userName }}</p>
               <p class="text-xs text-gray-500">{{ userRole }}</p>
             </div>
             <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-medium">
-              {{ user?.nickname?.[0] || user?.username?.[0] || 'U' }}
+              {{ userAvatar }}
             </div>
           </div>
         </div>
@@ -101,6 +101,8 @@ const notificationStore = useNotificationStore()
 const isSidebarCollapsed = ref(false)
 const user = computed(() => authStore.user)
 const userRole = computed(() => authStore.userRole)
+const userName = computed(() => authStore.user?.nickname || authStore.user?.username || '用户')
+const userAvatar = computed(() => (authStore.user?.nickname || authStore.user?.username || 'U')[0] || 'U')
 
 // 页面标题
 const pageTitle = computed(() => {
