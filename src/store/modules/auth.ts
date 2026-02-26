@@ -14,24 +14,44 @@ export const useAuthStore = defineStore('auth', {
     getUser: (state) => state.user,
     getToken: (state) => state.token,
     getUserRole: (state) => state.user?.role || 'employee',
-    getUserDepartment: (state) => state.user?.department
+    getUserDepartment: (state) => state.user?.department || ''
   },
   
   actions: {
     async login(username: string, password: string) {
       try {
-        const response = await userApi.login(username, password)
-        const { token, user } = response
-        
-        this.token = token
-        this.user = user
-        this.isAuthenticated = true
-        
-        // 保存到localStorage
-        localStorage.setItem(STORAGE_KEYS.TOKEN, token)
-        localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user))
-        
-        return user
+        // 模拟 API 调用
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            // 简单验证：admin/admin123
+            if (username === 'admin' && password === 'admin123') {
+              const user = {
+                id: 'admin',
+                username: 'admin',
+                nickname: '管理员',
+                email: 'admin@example.com',
+                role: 'admin' as const,
+                department: 'hr',
+                phone: '13800138000',
+                createdAt: new Date().toISOString()
+              }
+              
+              const token = `token-${Date.now()}-${Math.random().toString(36).substring(2)}`
+              
+              this.token = token
+              this.user = user
+              this.isAuthenticated = true
+            
+              // 保存到localStorage
+              localStorage.setItem(STORAGE_KEYS.TOKEN, token)
+              localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user))
+            
+              resolve(user)
+            } else {
+              reject(new Error('用户名或密码错误'))
+            }
+          }, 500) // 模拟网络延迟
+        })
       } catch (error) {
         throw error
       }
@@ -99,9 +119,13 @@ export const useAuthStore = defineStore('auth', {
       const userStr = localStorage.getItem(STORAGE_KEYS.USER)
       
       if (token && userStr) {
-        this.token = token
-        this.user = JSON.parse(userStr) as User
-        this.isAuthenticated = true
+        try {
+          this.token = token
+          this.user = JSON.parse(userStr) as User
+          this.isAuthenticated = true
+        } catch (e) {
+          console.error('Failed to restore auth:', e)
+        }
       }
     }
   }
