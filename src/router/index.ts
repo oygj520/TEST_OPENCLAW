@@ -62,11 +62,19 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
   
-  if (to.meta.requiresAuth && !token) {
-    next('/login')
-  } else {
-    next()
+  // 如果用户已登录且访问登录页，重定向到首页
+  if (token && to.path === '/login') {
+    next('/')
+    return
   }
+  
+  // 如果需要认证但没有token，重定向到登录页
+  if (to.meta.requiresAuth && !token && to.path !== '/login') {
+    next('/login')
+    return
+  }
+  
+  next()
 })
 
 export default router
