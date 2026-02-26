@@ -2,10 +2,10 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import NaiveUI from 'naive-ui'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 import App from './App.vue'
-import routes from './router'
+import router from './router'
 import './styles/main.css'
 
 /**
@@ -22,11 +22,8 @@ pinia.use(piniaPluginPersistedstate)
 
 /**
  * 创建路由
+ * 使用从 router/index.ts 导入的 router 实例
  */
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes
-})
 
 /**
  * 使用插件
