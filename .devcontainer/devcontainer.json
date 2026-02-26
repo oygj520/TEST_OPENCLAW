@@ -1,0 +1,11 @@
+{
+  "name": "OA System Frontend",
+  "service": "oa-frontend",
+  "ports": [
+    {
+      "port": 3000,
+      "onAutoForward": "notify"
+    }
+  ],
+  "updateContentCommand": "npm install && npm run dev"
+}
