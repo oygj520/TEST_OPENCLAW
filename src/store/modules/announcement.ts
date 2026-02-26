@@ -101,3 +101,4 @@ export const useAnnouncementStore = defineStore('announcement', {
 })
 
 export default useAnnouncementStore
+export const announcementStore = useAnnouncementStore()

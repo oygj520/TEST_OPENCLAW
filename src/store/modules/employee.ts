@@ -75,3 +75,4 @@ export const useEmployeeStore = defineStore('employee', {
 })
 
 export default useEmployeeStore
+export const employeeStore = useEmployeeStore()

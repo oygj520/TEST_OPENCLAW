@@ -91,3 +91,4 @@ export const useLeaveStore = defineStore('leave', {
 })
 
 export default useLeaveStore
+export const leaveStore = useLeaveStore()
