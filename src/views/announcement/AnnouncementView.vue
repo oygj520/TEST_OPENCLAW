@@ -126,7 +126,8 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { announcementApi, announcementStore } from '@/store/modules/announcement'
+import { announcementApi } from '@/store/modules/announcement'
+import { useAnnouncementStore } from '@/store/modules/announcement'
 import { ANNOUNCEMENT_TYPES, ANNOUNCEMENT_PRIORITIES } from '@/constants'
 
 const showAddModal = ref(false)
@@ -137,6 +138,8 @@ const filters = ref({
 
 const announcementTypes = ANNOUNCEMENT_TYPES
 const announcementPriorities = ANNOUNCEMENT_PRIORITIES
+
+const announcementStore = useAnnouncementStore()
 
 const newAnnouncement = ref({
   title: '',

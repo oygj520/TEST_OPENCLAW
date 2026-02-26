@@ -145,7 +145,8 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { employeeApi, employeeStore } from '@/store/modules/employee'
+import { employeeApi } from '@/store/modules/employee'
+import { useEmployeeStore } from '@/store/modules/employee'
 import { DEPARTMENTS, POSITIONS, EMPLOYEE_STATUSES } from '@/constants'
 
 const showAddModal = ref(false)
@@ -158,6 +159,8 @@ const filters = ref({
 const departments = DEPARTMENTS
 const positions = POSITIONS
 const employeeStatuses = EMPLOYEE_STATUSES
+
+const employeeStore = useEmployeeStore()
 
 const newEmployee = ref({
   username: '',

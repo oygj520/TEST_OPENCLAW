@@ -29,11 +29,6 @@ export const useEmployeeStore = defineStore('employee', {
     }) {
       this.loading = true
       try {
-        // TODO: 实际实现时调用API
-        // const response = await employeeApi.getEmployees(params)
-        // this.employees = response.data.list
-        // this.total = response.data.total
-        
         // 模拟数据
         const mockData = [
           { id: '1', username: 'admin', nickname: '管理员', email: 'admin@example.com', department: 'hr', position: 'ceo', status: 'active' },
@@ -75,4 +70,3 @@ export const useEmployeeStore = defineStore('employee', {
 })
 
 export default useEmployeeStore
-export const employeeStore = useEmployeeStore()

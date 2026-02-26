@@ -136,7 +136,8 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { leaveApi, leaveStore } from '@/store/modules/leave'
+import { leaveApi } from '@/store/modules/leave'
+import { useLeaveStore } from '@/store/modules/leave'
 import { LEAVE_TYPES, LEAVE_STATUSES } from '@/constants'
 
 const showAddModal = ref(false)
@@ -147,6 +148,8 @@ const filters = ref({
 
 const leaveTypes = LEAVE_TYPES
 const leaveStatuses = LEAVE_STATUSES
+
+const leaveStore = useLeaveStore()
 
 const newLeave = ref({
   type: 'leave',
