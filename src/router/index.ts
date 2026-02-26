@@ -17,7 +17,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: Layout,
-    meta: { requiresAuth: true },
+    // meta: { requiresAuth: true }, // 临时注释掉，方便开发检查页面
     children: [
       {
         path: '',
@@ -69,10 +69,12 @@ router.beforeEach((to, from, next) => {
   }
   
   // 如果需要认证但没有token，重定向到登录页
-  if (to.meta.requiresAuth && !token && to.path !== '/login') {
-    next('/login')
-    return
-  }
+  // 注意：为了方便开发，暂时注释掉认证检查
+  // 如果需要生产环境启用认证，请取消下面的注释
+  // if (to.meta.requiresAuth && !token && to.path !== '/login') {
+  //   next('/login')
+  //   return
+  // }
   
   next()
 })
